@@ -5,7 +5,6 @@ Users can **create, read, update, and delete** blog posts with authentication an
 
 ![Python](https://img.shields.io/badge/python-3.9%2B-blue)
 ![Django](https://img.shields.io/badge/django-4.2%2B-brightgreen)
-![License](https://img.shields.io/badge/license-MIT-blue)
 
 ---
 
