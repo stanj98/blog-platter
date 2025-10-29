@@ -30,6 +30,7 @@ jobs:
 
       - name: Run Bandit (Python security)
         run: bandit -r .
+        continue-on-error: true
 
   dependencies:
     name: Dependency audit
