@@ -29,7 +29,7 @@ jobs:
         run: semgrep --config auto .
 
       - name: Run Bandit (Python security)
-        run: bandir -r .
+        run: bandit -r .
 
   dependencies:
     name: Dependency audit
