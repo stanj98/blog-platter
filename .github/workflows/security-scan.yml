@@ -6,45 +6,45 @@ on:
   pull_request:
     branches: [main]
 
-  jobs:
-    sast:
-      name: SAST (Semgrep + Bandit)
-      runs-on: ubuntu-latest
-      steps:
-        - name: Checkout code
-          uses: actions/checkout@v3
-        - name: Set up Python
-          uses: actions/setup-python@v4
-          with:
-            python-version: "3.9"
-        - name: Install dependencies
-          run: |
-            python -m pip install --upgrade pip
-            pip install -r requirements.txt
-            pip install semgrep bandit
-        - name: Run Semgrep
-          run: semgrep --config auto .
+jobs:
+  sast:
+    name: SAST (Semgrep + Bandit)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.9"
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install semgrep bandit
+      - name: Run Semgrep
+        run: semgrep --config auto .
 
-        - name: Run Bandit
-          run: bandit -r .
-          continue-on-error: true
-    dependencies:
-      name: Dependency Audit
-      runs-on: ubuntu-latest
-      steps:
-        - name: Checkout Code
-          uses: actions/checkout@v3
-        - name: Install PIP Audit
-          run: pip install pip-audit
-        - name: Run PIP pip-audit
-          run: pip-audit
-    secrets-scanning:
-      name: Spot secrets
-      runs-on: ubuntu-latest
-      steps:
-        - name: Checkout Code
-          uses: actions/checkout@v3
-        - name: Run Gitleaks Secret Scan
-          uses: gitleaks/gitleaks-action@v2
-          with:
-            args: detect --source . --no-git --verbose
+      - name: Run Bandit
+        run: bandit -r .
+        continue-on-error: true
+  dependencies:
+    name: Dependency Audit
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+      - name: Install PIP Audit
+        run: pip install pip-audit
+      - name: Run PIP pip-audit
+        run: pip-audit
+  secrets-scanning:
+    name: Spot secrets
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+      - name: Run Gitleaks Secret Scan
+        uses: gitleaks/gitleaks-action@v2
+        with:
+          args: detect --source . --no-git --verbose
