@@ -22,7 +22,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
           pip install semgrep bandit
-      - name: Run Semgrep
+      - name: Run Semgrep 
         run: semgrep --config auto .
 
       - name: Run Bandit
